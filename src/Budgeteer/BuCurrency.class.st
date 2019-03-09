@@ -7,7 +7,7 @@ Class {
 	#classInstVars : [
 		'Currencies'
 	],
-	#category : #Budgeteer
+	#category : #'Budgeteer-Model'
 }
 
 { #category : #currencies }

@@ -6,14 +6,19 @@ Class {
 		'paymentDate',
 		'money',
 		'comment',
-		'agreement'
+		'businessItem'
 	],
-	#category : #Budgeteer
+	#category : #'Budgeteer-Model'
 }
 
 { #category : #accessing }
-BuFinancialTransaction >> agreement: anAgreement [
-	agreement := anAgreement
+BuFinancialTransaction >> businessItem [
+	^ businessItem
+]
+
+{ #category : #accessing }
+BuFinancialTransaction >> businessItem: anObject [
+	businessItem := anObject
 ]
 
 { #category : #accessing }
@@ -38,11 +43,6 @@ BuFinancialTransaction >> isExpense [
 
 { #category : #testing }
 BuFinancialTransaction >> isIncome [
-	^ false
-]
-
-{ #category : #testing }
-BuFinancialTransaction >> isInitial [
 	^ false
 ]
 

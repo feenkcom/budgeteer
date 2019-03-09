@@ -5,7 +5,7 @@ Class {
 		'currency',
 		'amount'
 	],
-	#category : #Budgeteer
+	#category : #'Budgeteer-Model'
 }
 
 { #category : #'as yet unclassified' }

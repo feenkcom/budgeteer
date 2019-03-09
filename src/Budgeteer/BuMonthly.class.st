@@ -1,16 +1,16 @@
 Class {
-	#name : #BuMonthlyPayment,
-	#superclass : #BuPaymentMethod,
+	#name : #BuMonthly,
+	#superclass : #BuOccurence,
 	#instVars : [
 		'monthDay',
 		'startMonth',
 		'endMonth'
 	],
-	#category : #Budgeteer
+	#category : #'Budgeteer-Model'
 }
 
 { #category : #enumerating }
-BuMonthlyPayment >> endDate [
+BuMonthly >> endDate [
 	^ Date
 		year: self endMonth year
 		month: self endMonth monthIndex
@@ -18,17 +18,17 @@ BuMonthlyPayment >> endDate [
 ]
 
 { #category : #accessing }
-BuMonthlyPayment >> endMonth [
+BuMonthly >> endMonth [
 	^ endMonth
 ]
 
 { #category : #accessing }
-BuMonthlyPayment >> endMonth: anObject [
+BuMonthly >> endMonth: anObject [
 	endMonth := anObject
 ]
 
 { #category : #enumerating }
-BuMonthlyPayment >> fromDate: aStartDate toDate: anEndDate do: aBlock [
+BuMonthly >> fromDate: aStartDate toDate: anEndDate do: aBlock [
 	| start end |
 	start := aStartDate max: self startDate.
 	end := anEndDate min: self endDate.
@@ -39,17 +39,17 @@ BuMonthlyPayment >> fromDate: aStartDate toDate: anEndDate do: aBlock [
 ]
 
 { #category : #accessing }
-BuMonthlyPayment >> monthDay [
+BuMonthly >> monthDay [
 	^ monthDay
 ]
 
 { #category : #accessing }
-BuMonthlyPayment >> monthDay: anObject [
+BuMonthly >> monthDay: anObject [
 	monthDay := anObject
 ]
 
 { #category : #enumerating }
-BuMonthlyPayment >> startDate [
+BuMonthly >> startDate [
 	^ Date
 		year: self startMonth year
 		month: self startMonth monthIndex
@@ -57,11 +57,11 @@ BuMonthlyPayment >> startDate [
 ]
 
 { #category : #accessing }
-BuMonthlyPayment >> startMonth [
+BuMonthly >> startMonth [
 	^ startMonth
 ]
 
 { #category : #accessing }
-BuMonthlyPayment >> startMonth: anObject [
+BuMonthly >> startMonth: anObject [
 	startMonth := anObject
 ]

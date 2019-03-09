@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'transactions'
 	],
-	#category : #Budgeteer
+	#category : #'Budgeteer-Model'
 }
 
 { #category : #adding }

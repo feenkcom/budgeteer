@@ -40,5 +40,5 @@ BuMonthlyPaymentExamples >> evaluateDuringValidPeriod [
 { #category : #'as yet unclassified' }
 BuMonthlyPaymentExamples >> monthly [
 	<gtExample>
-	^ BuMonthlyPayment new monthDay: 20; startMonth: 1 jan, 2019; endMonth: 1 mar, 2019
+	^ BuMonthly new monthDay: 20; startMonth: 1 jan, 2019; endMonth: 1 mar, 2019
 ]

@@ -1,24 +1,24 @@
 Class {
-	#name : #BuOneTimePayment,
-	#superclass : #BuPaymentMethod,
+	#name : #BuOneTime,
+	#superclass : #BuOccurence,
 	#instVars : [
 		'date'
 	],
-	#category : #Budgeteer
+	#category : #'Budgeteer-Model'
 }
 
 { #category : #accessing }
-BuOneTimePayment >> date [
+BuOneTime >> date [
 	^ date
 ]
 
 { #category : #accessing }
-BuOneTimePayment >> date: anObject [
+BuOneTime >> date: anObject [
 	date := anObject
 ]
 
 { #category : #enumerating }
-BuOneTimePayment >> fromDate: aStartDate toDate: anEndDate do: aBlock [
+BuOneTime >> fromDate: aStartDate toDate: anEndDate do: aBlock [
 	(aStartDate <= self date and: [ anEndDate >= self date ])
 		ifTrue: [ aBlock value: self date ]
 ]

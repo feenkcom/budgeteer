@@ -62,5 +62,5 @@ BuOneTimePaymentExamples >> evaluateDuringValidPeriod [
 { #category : #'as yet unclassified' }
 BuOneTimePaymentExamples >> oneTime [
 	<gtExample>
-	^ BuOneTimePayment new date: Date today
+	^ BuOneTime new date: Date today
 ]

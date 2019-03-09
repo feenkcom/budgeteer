@@ -1,7 +1,7 @@
 Class {
 	#name : #BuMoney,
 	#superclass : #Object,
-	#category : #Budgeteer
+	#category : #'Budgeteer-Model'
 }
 
 { #category : #operations }

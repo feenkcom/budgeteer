@@ -2,12 +2,13 @@ Class {
 	#name : #BuBusinessItem,
 	#superclass : #Object,
 	#instVars : [
-		'issueDate',
 		'paymentMethod',
 		'money',
-		'comment'
+		'comment',
+		'kind',
+		'paymentTerm'
 	],
-	#category : #Budgeteer
+	#category : #'Budgeteer-Model'
 }
 
 { #category : #accessing }
@@ -22,17 +23,28 @@ BuBusinessItem >> comment: anObject [
 
 { #category : #initialization }
 BuBusinessItem >> initialize [
-	money := BuCurrencyMoney CHF: 0
+	money := BuZeroMoney new.
+	paymentTerm := 0 days
+]
+
+{ #category : #testing }
+BuBusinessItem >> isExpense [
+	^ self kind isExpense
+]
+
+{ #category : #testing }
+BuBusinessItem >> isIncome [
+	^ self kind isIncome
 ]
 
 { #category : #accessing }
-BuBusinessItem >> issueDate [
-	^ issueDate
+BuBusinessItem >> kind [
+	^ kind
 ]
 
 { #category : #accessing }
-BuBusinessItem >> issueDate: anObject [
-	issueDate := anObject
+BuBusinessItem >> kind: anObject [
+	kind := anObject
 ]
 
 { #category : #accessing }
@@ -45,6 +57,15 @@ BuBusinessItem >> money: anObject [
 	money := anObject
 ]
 
+{ #category : #operations }
+BuBusinessItem >> newTransactionOn: aDate [
+	^ (self kind newTransaction)
+		money: self money;
+		issueDate: aDate;
+		paymentDate: (aDate + self paymentTerm);
+		businessItem: self
+]
+
 { #category : #accessing }
 BuBusinessItem >> paymentMethod [
 	^ paymentMethod
@@ -55,17 +76,23 @@ BuBusinessItem >> paymentMethod: anObject [
 	paymentMethod := anObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
+BuBusinessItem >> paymentTerm [
+	^ paymentTerm
+]
+
+{ #category : #accessing }
+BuBusinessItem >> paymentTerm: anObject [
+	paymentTerm := anObject
+]
+
+{ #category : #operations }
 BuBusinessItem >> transactionsFromDate: aStartDate toDate: anEndDate [
 	| transactions |
 	transactions := BuTransactionGroup new.
-	self paymentMethod 
-		fromDate: aStartDate 
-		toDate: anEndDate 
-		do: [ :aDate |
-			transactions add: (BuFinancialTransaction new 
-				money: self money;
-				paymentDate: aDate;
-				agreement: self) ].
+	self paymentMethod
+		fromDate: aStartDate
+		toDate: anEndDate
+		do: [ :aDate | transactions add: (self newTransactionOn: aDate) ].
 	^ transactions
 ]

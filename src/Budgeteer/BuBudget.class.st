@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'businessItems'
 	],
-	#category : #Budgeteer
+	#category : #'Budgeteer-Model'
 }
 
 { #category : #accessing }
