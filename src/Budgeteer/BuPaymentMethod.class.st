@@ -1,10 +1,10 @@
 Class {
-	#name : #FkPaymentMethod,
+	#name : #BuPaymentMethod,
 	#superclass : #Object,
 	#category : #Budgeteer
 }
 
 { #category : #enumerating }
-FkPaymentMethod >> fromDate: aStartDate toDate: anEndDate do: aBlock [
+BuPaymentMethod >> fromDate: aStartDate toDate: anEndDate do: aBlock [
 	self subclassResponsibility 
 ]

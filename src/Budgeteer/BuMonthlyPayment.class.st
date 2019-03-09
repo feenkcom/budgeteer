@@ -1,6 +1,6 @@
 Class {
-	#name : #FkMonthlyPayment,
-	#superclass : #FkPaymentMethod,
+	#name : #BuMonthlyPayment,
+	#superclass : #BuPaymentMethod,
 	#instVars : [
 		'monthDay',
 		'startMonth',
@@ -10,7 +10,7 @@ Class {
 }
 
 { #category : #enumerating }
-FkMonthlyPayment >> endDate [
+BuMonthlyPayment >> endDate [
 	^ Date
 		year: self endMonth year
 		month: self endMonth monthIndex
@@ -18,17 +18,17 @@ FkMonthlyPayment >> endDate [
 ]
 
 { #category : #accessing }
-FkMonthlyPayment >> endMonth [
+BuMonthlyPayment >> endMonth [
 	^ endMonth
 ]
 
 { #category : #accessing }
-FkMonthlyPayment >> endMonth: anObject [
+BuMonthlyPayment >> endMonth: anObject [
 	endMonth := anObject
 ]
 
 { #category : #enumerating }
-FkMonthlyPayment >> fromDate: aStartDate toDate: anEndDate do: aBlock [
+BuMonthlyPayment >> fromDate: aStartDate toDate: anEndDate do: aBlock [
 	| start end |
 	start := aStartDate max: self startDate.
 	end := anEndDate min: self endDate.
@@ -39,17 +39,17 @@ FkMonthlyPayment >> fromDate: aStartDate toDate: anEndDate do: aBlock [
 ]
 
 { #category : #accessing }
-FkMonthlyPayment >> monthDay [
+BuMonthlyPayment >> monthDay [
 	^ monthDay
 ]
 
 { #category : #accessing }
-FkMonthlyPayment >> monthDay: anObject [
+BuMonthlyPayment >> monthDay: anObject [
 	monthDay := anObject
 ]
 
 { #category : #enumerating }
-FkMonthlyPayment >> startDate [
+BuMonthlyPayment >> startDate [
 	^ Date
 		year: self startMonth year
 		month: self startMonth monthIndex
@@ -57,11 +57,11 @@ FkMonthlyPayment >> startDate [
 ]
 
 { #category : #accessing }
-FkMonthlyPayment >> startMonth [
+BuMonthlyPayment >> startMonth [
 	^ startMonth
 ]
 
 { #category : #accessing }
-FkMonthlyPayment >> startMonth: anObject [
+BuMonthlyPayment >> startMonth: anObject [
 	startMonth := anObject
 ]

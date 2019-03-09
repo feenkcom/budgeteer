@@ -1,6 +1,6 @@
 Class {
-	#name : #FkMoney,
-	#superclass : #Object,
+	#name : #BuCurrencyMoney,
+	#superclass : #BuMoney,
 	#instVars : [
 		'currency',
 		'amount'
@@ -9,51 +9,61 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-FkMoney class >> CHF: aNumber [
+BuCurrencyMoney class >> CHF: aNumber [
 	^ self new 
 		amount: aNumber;
-		currency: FkCurrency CHF
+		currency: BuCurrency CHF
 ]
 
 { #category : #operations }
-FkMoney >> + other [
-	[  other isKindOf: FkMoney ] assert.
-	other = 0 ifTrue: [^ self].
+BuCurrencyMoney >> + other [
+	[  other isKindOf: BuMoney ] assert.
+	other isZero ifTrue: [ ^ self ].
 	other currency = self currency ifTrue:
 		[^ self class new amount: self amount + other amount; currency: self currency].
-	^ nil "MoneyBag new
-		add: other;
-		add: self;
-		yourself"
+	^ nil
 ]
 
 { #category : #accessing }
-FkMoney >> amount [
+BuCurrencyMoney >> = aMoney [
+	^ (self isZero and: [ aMoney isZero ]) 
+		or: [ 
+			(aMoney amount = self amount) and: [ 
+				aMoney currency = self currency ] ]
+]
+
+{ #category : #accessing }
+BuCurrencyMoney >> amount [
 	^ amount
 ]
 
 { #category : #accessing }
-FkMoney >> amount: anObject [
+BuCurrencyMoney >> amount: anObject [
 	amount := anObject
 ]
 
 { #category : #accessing }
-FkMoney >> currency [
+BuCurrencyMoney >> currency [
 	^ currency
 ]
 
 { #category : #accessing }
-FkMoney >> currency: anObject [
+BuCurrencyMoney >> currency: anObject [
 	currency := anObject
 ]
 
 { #category : #operations }
-FkMoney >> negative [
+BuCurrencyMoney >> isZero [
+	^ amount = 0
+]
+
+{ #category : #operations }
+BuCurrencyMoney >> negative [
 	^ self class new amount: 0 - self amount; currency: self currency
 ]
 
 { #category : #printing }
-FkMoney >> printOn: stream [
+BuCurrencyMoney >> printOn: stream [
 	stream 
 		nextPutAll: self amount asString;
 		space;

@@ -1,20 +1,19 @@
 Class {
-	#name : #FkBudget,
+	#name : #BuBudget,
 	#superclass : #Object,
 	#instVars : [
-		'initial',
-		'transactions'
+		'businessItems'
 	],
 	#category : #Budgeteer
 }
 
 { #category : #accessing }
-FkBudget >> add: aTransaction [
+BuBudget >> add: aTransaction [
 	self transactions add: aTransaction
 ]
 
 { #category : #api }
-FkBudget >> daysAndMoneyUntil: aDate [
+BuBudget >> daysAndMoneyUntil: aDate [
 	| daysAndMoney money currentDate groupedTransactions |
 	daysAndMoney := OrderedCollection new.
 	money := 0 CHF.
@@ -33,12 +32,12 @@ FkBudget >> daysAndMoneyUntil: aDate [
 ]
 
 { #category : #api }
-FkBudget >> expense: aString money: aMoney on: aDate [
+BuBudget >> expense: aString money: aMoney on: aDate [
 	self add: (FkExpense new comment: aString; money: aMoney; paymentDate: aDate)
 ]
 
 { #category : #ui }
-FkBudget >> gtInspectorTransactionsIn: composite [
+BuBudget >> gtInspectorTransactionsIn: composite [
 	<gtInspectorPresentationOrder: 40>
 	composite fastTable
 		title: 'Transactions';
@@ -52,7 +51,7 @@ FkBudget >> gtInspectorTransactionsIn: composite [
 ]
 
 { #category : #'as yet unclassified' }
-FkBudget >> gtInspectorTransactionsPerMonthIn: composite [
+BuBudget >> gtInspectorTransactionsPerMonthIn: composite [
 	<gtInspectorPresentationOrder: 40>
 	composite fastTable
 		title: 'Transactions per month';
@@ -67,34 +66,28 @@ FkBudget >> gtInspectorTransactionsPerMonthIn: composite [
 ]
 
 { #category : #api }
-FkBudget >> income: aString money: aMoney on: aDate [
+BuBudget >> income: aString money: aMoney on: aDate [
 	self add: (FkIncome new comment: aString; money: aMoney; paymentDate: aDate)
 ]
 
 { #category : #accessing }
-FkBudget >> initial [
-	^ initial
-]
-
-{ #category : #accessing }
-FkBudget >> initial: anInitial [
+BuBudget >> initial: anInitial [
 	initial := anInitial
 ]
 
 { #category : #initialize }
-FkBudget >> initialize [
-	transactions := SortedCollection sortBlock: [ :a :b | a paymentDate < b paymentDate ].
-	initial := FkInitial new money: 0 CHF; paymentDate: 1 jan
+BuBudget >> initialize [
+	businessItems := OrderedCollection new
 ]
 
 { #category : #api }
-FkBudget >> moneyOn: aDate [
+BuBudget >> moneyOn: aDate [
 	^ (self relevantTransactions select: [ :each | each paymentDate <= aDate ])
 		inject: self initial effectiveMoney into: [ :previousValue :each |  previousValue + (each effectiveMoney) ].
 ]
 
 { #category : #'as yet unclassified' }
-FkBudget >> relevantBudgetPerMonth [
+BuBudget >> relevantBudgetPerMonth [
 	| relevantTransactions |
 	relevantTransactions := (self relevantTransactions asOrderedCollection groupedBy: [ :each | each paymentDate month ]) associations sorted: [ :a :b | a key < b key ].
 	^ relevantTransactions collect: [ :association |
@@ -105,21 +98,11 @@ FkBudget >> relevantBudgetPerMonth [
 ]
 
 { #category : #accessing }
-FkBudget >> relevantTransactions [
+BuBudget >> relevantTransactions [
 	^ self transactions select: [ :each | each paymentDate >= self initial paymentDate ]
 ]
 
 { #category : #'as yet unclassified' }
-FkBudget >> relevantTransactionsPerMonths [
+BuBudget >> relevantTransactionsPerMonths [
 	^ (self relevantTransactions asOrderedCollection groupedBy: [ :each | each paymentDate month ]) associations sorted: [ :a :b | a key < b key ]
-]
-
-{ #category : #accessing }
-FkBudget >> transactions [
-	^ transactions
-]
-
-{ #category : #accessing }
-FkBudget >> transactions: anObject [
-	transactions := anObject
 ]

@@ -1,6 +1,6 @@
 Class {
-	#name : #FkOneTimePayment,
-	#superclass : #FkPaymentMethod,
+	#name : #BuOneTimePayment,
+	#superclass : #BuPaymentMethod,
 	#instVars : [
 		'date'
 	],
@@ -8,17 +8,17 @@ Class {
 }
 
 { #category : #accessing }
-FkOneTimePayment >> date [
+BuOneTimePayment >> date [
 	^ date
 ]
 
 { #category : #accessing }
-FkOneTimePayment >> date: anObject [
+BuOneTimePayment >> date: anObject [
 	date := anObject
 ]
 
 { #category : #enumerating }
-FkOneTimePayment >> fromDate: aStartDate toDate: anEndDate do: aBlock [
+BuOneTimePayment >> fromDate: aStartDate toDate: anEndDate do: aBlock [
 	(aStartDate <= self date and: [ anEndDate >= self date ])
 		ifTrue: [ aBlock value: self date ]
 ]

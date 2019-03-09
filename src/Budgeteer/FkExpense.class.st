@@ -1,6 +1,6 @@
 Class {
 	#name : #FkExpense,
-	#superclass : #FkFinancialTransaction,
+	#superclass : #BuFinancialTransaction,
 	#category : #Budgeteer
 }
 

@@ -1,11 +1,11 @@
 Class {
-	#name : #FkOneTimePaymentExamples,
+	#name : #BuOneTimePaymentExamples,
 	#superclass : #Object,
-	#category : #Budgeteer
+	#category : #'Budgeteer-Examples'
 }
 
 { #category : #'as yet unclassified' }
-FkOneTimePaymentExamples >> evaluateDuringPeriodAfterDate [
+BuOneTimePaymentExamples >> evaluateDuringPeriodAfterDate [
 	<gtExample>
 	| value oneTime |
 	value := nil.
@@ -16,7 +16,7 @@ FkOneTimePaymentExamples >> evaluateDuringPeriodAfterDate [
 ]
 
 { #category : #'as yet unclassified' }
-FkOneTimePaymentExamples >> evaluateDuringPeriodBeforeDate [
+BuOneTimePaymentExamples >> evaluateDuringPeriodBeforeDate [
 	<gtExample>
 	| value oneTime |
 	value := nil.
@@ -27,7 +27,7 @@ FkOneTimePaymentExamples >> evaluateDuringPeriodBeforeDate [
 ]
 
 { #category : #'as yet unclassified' }
-FkOneTimePaymentExamples >> evaluateDuringPeriodEndingOnDate [
+BuOneTimePaymentExamples >> evaluateDuringPeriodEndingOnDate [
 	<gtExample>
 	| value oneTime |
 	value := nil.
@@ -38,7 +38,7 @@ FkOneTimePaymentExamples >> evaluateDuringPeriodEndingOnDate [
 ]
 
 { #category : #'as yet unclassified' }
-FkOneTimePaymentExamples >> evaluateDuringPeriodStartingOnDate [
+BuOneTimePaymentExamples >> evaluateDuringPeriodStartingOnDate [
 	<gtExample>
 	| value oneTime |
 	value := nil.
@@ -49,7 +49,7 @@ FkOneTimePaymentExamples >> evaluateDuringPeriodStartingOnDate [
 ]
 
 { #category : #'as yet unclassified' }
-FkOneTimePaymentExamples >> evaluateDuringValidPeriod [
+BuOneTimePaymentExamples >> evaluateDuringValidPeriod [
 	<gtExample>
 	| value oneTime |
 	value := nil.
@@ -60,7 +60,7 @@ FkOneTimePaymentExamples >> evaluateDuringValidPeriod [
 ]
 
 { #category : #'as yet unclassified' }
-FkOneTimePaymentExamples >> oneTime [
+BuOneTimePaymentExamples >> oneTime [
 	<gtExample>
-	^ FkOneTimePayment new date: Date today
+	^ BuOneTimePayment new date: Date today
 ]

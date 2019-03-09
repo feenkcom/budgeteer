@@ -1,11 +1,11 @@
 Class {
-	#name : #FkMonthlyPaymentExamples,
+	#name : #BuMonthlyPaymentExamples,
 	#superclass : #Object,
-	#category : #Budgeteer
+	#category : #'Budgeteer-Examples'
 }
 
 { #category : #'as yet unclassified' }
-FkMonthlyPaymentExamples >> evaluateDuringPeriodEndingSoonerThanTheEndDate [
+BuMonthlyPaymentExamples >> evaluateDuringPeriodEndingSoonerThanTheEndDate [
 	<gtExample>
 	| values monthly |
 	values := OrderedCollection new.
@@ -16,7 +16,7 @@ FkMonthlyPaymentExamples >> evaluateDuringPeriodEndingSoonerThanTheEndDate [
 ]
 
 { #category : #'as yet unclassified' }
-FkMonthlyPaymentExamples >> evaluateDuringPeriodStartingLaterThanTheStartDate [
+BuMonthlyPaymentExamples >> evaluateDuringPeriodStartingLaterThanTheStartDate [
 	<gtExample>
 	| values monthly |
 	values := OrderedCollection new.
@@ -27,7 +27,7 @@ FkMonthlyPaymentExamples >> evaluateDuringPeriodStartingLaterThanTheStartDate [
 ]
 
 { #category : #'as yet unclassified' }
-FkMonthlyPaymentExamples >> evaluateDuringValidPeriod [
+BuMonthlyPaymentExamples >> evaluateDuringValidPeriod [
 	<gtExample>
 	| values monthly |
 	values := OrderedCollection new.
@@ -38,7 +38,7 @@ FkMonthlyPaymentExamples >> evaluateDuringValidPeriod [
 ]
 
 { #category : #'as yet unclassified' }
-FkMonthlyPaymentExamples >> monthly [
+BuMonthlyPaymentExamples >> monthly [
 	<gtExample>
-	^ FkMonthlyPayment new monthDay: 20; startMonth: 1 jan, 2019; endMonth: 1 mar, 2019
+	^ BuMonthlyPayment new monthDay: 20; startMonth: 1 jan, 2019; endMonth: 1 mar, 2019
 ]
