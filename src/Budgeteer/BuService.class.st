@@ -1,11 +1,10 @@
 Class {
 	#name : #BuService,
-	#superclass : #BuBusinessItem,
+	#superclass : #BuEntry,
 	#category : #'Budgeteer-Model'
 }
 
 { #category : #initialization }
 BuService >> initialize [
-	super initialize.
-	kind := BuBusinessExpense new.
+	super initialize
 ]

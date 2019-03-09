@@ -1,6 +1,6 @@
 Class {
 	#name : #BuSalary,
-	#superclass : #BuBusinessItem,
+	#superclass : #BuEntry,
 	#category : #'Budgeteer-Model'
 }
 
@@ -8,5 +8,5 @@ Class {
 BuSalary >> initialize [
 	super initialize.
 	paymentMethod := BuMonthly new monthDay: 20.
-	kind := BuBusinessIncome new.
+	self beExpense
 ]

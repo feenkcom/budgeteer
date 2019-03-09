@@ -1,20 +1,20 @@
 Class {
-	#name : #BuBusinessItemKind,
+	#name : #BuEntryKind,
 	#superclass : #Object,
 	#category : #'Budgeteer-Model'
 }
 
 { #category : #testing }
-BuBusinessItemKind >> isExpense [
+BuEntryKind >> isExpense [
 	^ false
 ]
 
 { #category : #testing }
-BuBusinessItemKind >> isIncome [
+BuEntryKind >> isIncome [
 	^ false
 ]
 
 { #category : #accessing }
-BuBusinessItemKind >> newTransaction [
+BuEntryKind >> newTransaction [
 	self subclassResponsibility
 ]

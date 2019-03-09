@@ -1,15 +1,15 @@
 Class {
-	#name : #BuBusinessExpense,
-	#superclass : #BuBusinessItemKind,
+	#name : #BuExpense,
+	#superclass : #BuEntryKind,
 	#category : #'Budgeteer-Model'
 }
 
 { #category : #testing }
-BuBusinessExpense >> isExpense [
+BuExpense >> isExpense [
 	^ true
 ]
 
 { #category : #accessing }
-BuBusinessExpense >> newTransaction [
+BuExpense >> newTransaction [
 	^ BuExpenseTransaction new
 ]

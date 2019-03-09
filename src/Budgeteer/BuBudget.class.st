@@ -2,14 +2,21 @@ Class {
 	#name : #BuBudget,
 	#superclass : #Object,
 	#instVars : [
-		'businessItems'
+		'items',
+		'endDate',
+		'startDate'
 	],
 	#category : #'Budgeteer-Model'
 }
 
 { #category : #accessing }
-BuBudget >> add: aTransaction [
-	self transactions add: aTransaction
+BuBudget >> add: anEntry [
+	items add: anEntry
+]
+
+{ #category : #accessing }
+BuBudget >> addItem: anItem [
+	self items add: anItem
 ]
 
 { #category : #api }
@@ -31,53 +38,29 @@ BuBudget >> daysAndMoneyUntil: aDate [
 	^ daysAndMoney
 ]
 
-{ #category : #api }
-BuBudget >> expense: aString money: aMoney on: aDate [
-	self add: (FkExpense new comment: aString; money: aMoney; paymentDate: aDate)
-]
-
-{ #category : #ui }
-BuBudget >> gtInspectorTransactionsIn: composite [
-	<gtInspectorPresentationOrder: 40>
-	composite fastTable
-		title: 'Transactions';
-		display: [ self relevantTransactions ];
-		column: 'Date' evaluated: [ :each | each paymentDate ] width: 110;
-		column: 'Money' evaluated: [ :each | each money ] width: 80;
-		column: 'Budget' evaluated: [ :each | self moneyOn: each paymentDate ] width: 80;
-		column: 'Type' evaluated: [ :each | '' ]  width: 70 tags: [ :each | { each class name removePrefix: 'FK' } ];
-		column: 'Comment' evaluated: [ :each | each comment ];
-		when: [ self transactions notEmpty ]
-]
-
-{ #category : #'as yet unclassified' }
-BuBudget >> gtInspectorTransactionsPerMonthIn: composite [
-	<gtInspectorPresentationOrder: 40>
-	composite fastTable
-		title: 'Transactions per month';
-		display: [ self relevantBudgetPerMonth ];
-		column: 'Month' evaluated: [ :each | each key ] width: 110;
-		column: 'End of month' evaluated: [ :each | self moneyOn: each key end ] width: 80;
-		column: 'Transactions' evaluated: [ :each | each value transactions inject: 0 CHF into: [ :sum :x | x effectiveMoney + sum ] ] width: 120;
-		column: 'Income' evaluated: [ :each | (each value transactions select: #isIncome) inject: 0 CHF into: [ :sum :x | x effectiveMoney + sum ] ] width: 80;
-		column: 'Expenses' evaluated: [ :each | (each value transactions select: #isExpense) inject: 0 CHF into: [ :sum :x | x effectiveMoney + sum ] ] width: 80;
-		when: [ self transactions notEmpty ];
-		send: #value
-]
-
-{ #category : #api }
-BuBudget >> income: aString money: aMoney on: aDate [
-	self add: (FkIncome new comment: aString; money: aMoney; paymentDate: aDate)
+{ #category : #accessing }
+BuBudget >> endDate [
+	^ endDate
 ]
 
 { #category : #accessing }
-BuBudget >> initial: anInitial [
-	initial := anInitial
+BuBudget >> endDate: anObject [
+	endDate := anObject
 ]
 
 { #category : #initialize }
 BuBudget >> initialize [
-	businessItems := OrderedCollection new
+	items := OrderedCollection new
+]
+
+{ #category : #accessing }
+BuBudget >> items [
+	^ items
+]
+
+{ #category : #accessing }
+BuBudget >> items: anObject [
+	items := anObject
 ]
 
 { #category : #api }
@@ -99,10 +82,29 @@ BuBudget >> relevantBudgetPerMonth [
 
 { #category : #accessing }
 BuBudget >> relevantTransactions [
-	^ self transactions select: [ :each | each paymentDate >= self initial paymentDate ]
+	| transactions |
+	transactions := BuTransactionGroup new.
+	self items do: [ :anEntry |
+		anEntry
+			transactionsFromDate: startDate 
+			toDate: endDate 
+			do: [ :aTransaction | transactions add: aTransaction ] ].
+	^ transactions	
+	
+
 ]
 
 { #category : #'as yet unclassified' }
 BuBudget >> relevantTransactionsPerMonths [
 	^ (self relevantTransactions asOrderedCollection groupedBy: [ :each | each paymentDate month ]) associations sorted: [ :a :b | a key < b key ]
+]
+
+{ #category : #accessing }
+BuBudget >> startDate [
+	^ startDate
+]
+
+{ #category : #accessing }
+BuBudget >> startDate: anObject [
+	startDate := anObject
 ]

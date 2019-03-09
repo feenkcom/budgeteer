@@ -1,11 +1,11 @@
 Class {
-	#name : #BuBusinessItemExamples,
+	#name : #BuBudgetItemExamples,
 	#superclass : #Object,
 	#category : #'Budgeteer-Examples'
 }
 
-{ #category : #'as yet unclassified' }
-BuBusinessItemExamples >> asset [
+{ #category : #examples }
+BuBudgetItemExamples >> asset [
 	<gtExample>
 	| asset transactions |
 	asset := BuAsset new paymentMethod: (BuOneTime new date: Date today); money: (BuCurrencyMoney CHF: 100).
@@ -15,8 +15,8 @@ BuBusinessItemExamples >> asset [
 	^ asset
 ]
 
-{ #category : #'as yet unclassified' }
-BuBusinessItemExamples >> salary [
+{ #category : #examples }
+BuBudgetItemExamples >> salary [
 	<gtExample>
 	| asset transactions |
 	asset := BuSalary new paymentMethod: (BuMonthly new monthDay: 20; startMonth: 1 jan, 2019; endMonth: 1 mar, 2019); money: 100 buCHF.
@@ -27,8 +27,8 @@ BuBusinessItemExamples >> salary [
 	^ asset
 ]
 
-{ #category : #'as yet unclassified' }
-BuBusinessItemExamples >> salaryWithPaymentTerm [
+{ #category : #examples }
+BuBudgetItemExamples >> salaryWithPaymentTerm [
 	<gtExample>
 	| asset transactions |
 	asset := BuSalary new 

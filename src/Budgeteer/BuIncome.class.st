@@ -1,15 +1,15 @@
 Class {
-	#name : #BuBusinessIncome,
-	#superclass : #BuBusinessItemKind,
+	#name : #BuIncome,
+	#superclass : #BuEntryKind,
 	#category : #'Budgeteer-Model'
 }
 
 { #category : #testing }
-BuBusinessIncome >> isIncome [
+BuIncome >> isIncome [
 	^ true
 ]
 
 { #category : #accessing }
-BuBusinessIncome >> newTransaction [
+BuIncome >> newTransaction [
 	^ BuIncomeTransaction new
 ]

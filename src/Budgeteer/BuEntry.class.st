@@ -1,5 +1,5 @@
 Class {
-	#name : #BuBusinessItem,
+	#name : #BuEntry,
 	#superclass : #Object,
 	#instVars : [
 		'paymentMethod',
@@ -12,53 +12,64 @@ Class {
 }
 
 { #category : #accessing }
-BuBusinessItem >> comment [
+BuEntry >> beExpense [
+	self kind: BuExpense new
+]
+
+{ #category : #accessing }
+BuEntry >> beIncome [
+	self kind: BuIncome new
+]
+
+{ #category : #accessing }
+BuEntry >> comment [
 	^ comment
 ]
 
 { #category : #accessing }
-BuBusinessItem >> comment: anObject [
+BuEntry >> comment: anObject [
 	comment := anObject
 ]
 
 { #category : #initialization }
-BuBusinessItem >> initialize [
+BuEntry >> initialize [
 	money := BuZeroMoney new.
-	paymentTerm := 0 days
+	paymentTerm := 0 days.
+	self beIncome
 ]
 
 { #category : #testing }
-BuBusinessItem >> isExpense [
+BuEntry >> isExpense [
 	^ self kind isExpense
 ]
 
 { #category : #testing }
-BuBusinessItem >> isIncome [
+BuEntry >> isIncome [
 	^ self kind isIncome
 ]
 
 { #category : #accessing }
-BuBusinessItem >> kind [
+BuEntry >> kind [
 	^ kind
 ]
 
 { #category : #accessing }
-BuBusinessItem >> kind: anObject [
+BuEntry >> kind: anObject [
 	kind := anObject
 ]
 
 { #category : #accessing }
-BuBusinessItem >> money [
+BuEntry >> money [
 	^ money
 ]
 
 { #category : #accessing }
-BuBusinessItem >> money: anObject [
+BuEntry >> money: anObject [
 	money := anObject
 ]
 
-{ #category : #operations }
-BuBusinessItem >> newTransactionOn: aDate [
+{ #category : #private }
+BuEntry >> newTransactionOn: aDate [
 	^ (self kind newTransaction)
 		money: self money;
 		issueDate: aDate;
@@ -67,32 +78,40 @@ BuBusinessItem >> newTransactionOn: aDate [
 ]
 
 { #category : #accessing }
-BuBusinessItem >> paymentMethod [
+BuEntry >> paymentMethod [
 	^ paymentMethod
 ]
 
 { #category : #accessing }
-BuBusinessItem >> paymentMethod: anObject [
+BuEntry >> paymentMethod: anObject [
 	paymentMethod := anObject
 ]
 
 { #category : #accessing }
-BuBusinessItem >> paymentTerm [
+BuEntry >> paymentTerm [
 	^ paymentTerm
 ]
 
 { #category : #accessing }
-BuBusinessItem >> paymentTerm: anObject [
-	paymentTerm := anObject
+BuEntry >> paymentTerm: aDuration [
+	paymentTerm := aDuration
 ]
 
 { #category : #operations }
-BuBusinessItem >> transactionsFromDate: aStartDate toDate: anEndDate [
+BuEntry >> transactionsFromDate: aStartDate toDate: anEndDate [
 	| transactions |
 	transactions := BuTransactionGroup new.
+	self 
+		transactionsFromDate: aStartDate 
+		toDate: anEndDate 
+		do: [ :aTransaction | transactions add: aTransaction ].
+	^ transactions
+]
+
+{ #category : #operations }
+BuEntry >> transactionsFromDate: aStartDate toDate: anEndDate do: aBlock [
 	self paymentMethod
 		fromDate: aStartDate
 		toDate: anEndDate
-		do: [ :aDate | transactions add: (self newTransactionOn: aDate) ].
-	^ transactions
+		do: [ :aDate | aBlock value: (self newTransactionOn: aDate) ].
 ]
