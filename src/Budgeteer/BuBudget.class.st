@@ -48,6 +48,33 @@ BuBudget >> endDate: anObject [
 	endDate := anObject
 ]
 
+{ #category : #accessing }
+BuBudget >> entries [
+	^ items
+]
+
+{ #category : #accessing }
+BuBudget >> gtEntriesFor: aView [
+	<gtView>
+	^ aView columnedList
+		title: 'Entries';
+		items: [ self entries ];
+		column: 'Name' do: [ :aColumn | aColumn item: [ :anEntry | anEntry comment ] ];
+		column: 'Money' do: [ :aColumn | aColumn item: [ :anEntry | anEntry money ] ]
+]
+
+{ #category : #accessing }
+BuBudget >> gtTransactionsFor: aView [
+	<gtView>
+	^ self relevantTransactions gtTransactionsFor: aView
+]
+
+{ #category : #accessing }
+BuBudget >> gtTransactionsPerPaymentMonthFor: aView [
+	<gtView>
+	^ self relevantTransactions gtTransactionsPerPaymentMonthFor: aView
+]
+
 { #category : #initialize }
 BuBudget >> initialize [
 	items := OrderedCollection new
@@ -67,6 +94,13 @@ BuBudget >> items: anObject [
 BuBudget >> moneyOn: aDate [
 	^ (self relevantTransactions select: [ :each | each paymentDate <= aDate ])
 		inject: self initial effectiveMoney into: [ :previousValue :each |  previousValue + (each effectiveMoney) ].
+]
+
+{ #category : #accessing }
+BuBudget >> monthlySalary: aMoney for: aString on: aDay from: aStartMonth to: anEndMonth [
+	self add: (BuSalary new 
+		schedule: (BuMonthly new monthDay: aDay; startMonth: aStartMonth; endMonth: anEndMonth); 
+		money: aMoney)
 ]
 
 { #category : #'as yet unclassified' }
@@ -89,9 +123,7 @@ BuBudget >> relevantTransactions [
 			transactionsFromDate: startDate 
 			toDate: endDate 
 			do: [ :aTransaction | transactions add: aTransaction ] ].
-	^ transactions	
-	
-
+	^ transactions
 ]
 
 { #category : #'as yet unclassified' }

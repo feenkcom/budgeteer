@@ -49,7 +49,7 @@ BuTransactionGroup >> gtTransactionsFor: aView [
 	^ aView columnedList
 		title: 'Transactions';
 		items: [ self transactions ];
-		column: 'Paymeant date' do: [:aColumn | aColumn item: [:aTransaction | aTransaction paymentDate ]];
+		column: 'Payment date' do: [:aColumn | aColumn item: [:aTransaction | aTransaction paymentDate ]];
 		column: 'Comment' do: [:aColumn | aColumn item: [:aTransaction | aTransaction comment ]];
 		column: 'Money' do: [:aColumn | aColumn item: [:aTransaction | aTransaction effectiveMoney ]]
 ]
@@ -59,11 +59,12 @@ BuTransactionGroup >> gtTransactionsPerPaymentMonthFor: aView [
 	<gtView>
 	^ aView columnedList
 		title: 'Per payment month';
-		items: [ self perPaymentMonth associations ];
+		items: [ self perPaymentMonth associations sorted: [:a :b | a key < b key ] ];
 		column: 'Month' do: [:aColumn | aColumn item: [:assoc | assoc key ]];
-		column: 'Total' do: [ :aColumn | aColumn item: [:assoc | assoc value totalMoney ]];
+		column: 'End of month' do: [ :aColumn | aColumn item: [:assoc | self moneyOn: assoc key end ]];
 		column: 'Income' do: [:aColumn | aColumn item: [:assoc | assoc value incomeMoney ]];
-		column: 'Expense' do: [:aColumn | aColumn item: [:assoc | assoc value expenseMoney ]]
+		column: 'Expense' do: [:aColumn | aColumn item: [:assoc | assoc value expenseMoney ]];
+		send: #value
 ]
 
 { #category : #operations }

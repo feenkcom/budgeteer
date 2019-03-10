@@ -23,8 +23,8 @@ BuMonthly >> endMonth [
 ]
 
 { #category : #accessing }
-BuMonthly >> endMonth: anObject [
-	endMonth := anObject
+BuMonthly >> endMonth: aMonth [
+	endMonth := aMonth
 ]
 
 { #category : #enumerating }
@@ -62,6 +62,6 @@ BuMonthly >> startMonth [
 ]
 
 { #category : #accessing }
-BuMonthly >> startMonth: anObject [
-	startMonth := anObject
+BuMonthly >> startMonth: aMonth [
+	startMonth := aMonth
 ]

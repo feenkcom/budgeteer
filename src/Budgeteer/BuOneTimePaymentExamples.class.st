@@ -4,7 +4,7 @@ Class {
 	#category : #'Budgeteer-Examples'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #examples }
 BuOneTimePaymentExamples >> evaluateDuringPeriodAfterDate [
 	<gtExample>
 	| value oneTime |
@@ -15,7 +15,7 @@ BuOneTimePaymentExamples >> evaluateDuringPeriodAfterDate [
 	^ oneTime
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #examples }
 BuOneTimePaymentExamples >> evaluateDuringPeriodBeforeDate [
 	<gtExample>
 	| value oneTime |
@@ -26,7 +26,7 @@ BuOneTimePaymentExamples >> evaluateDuringPeriodBeforeDate [
 	^ oneTime
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #examples }
 BuOneTimePaymentExamples >> evaluateDuringPeriodEndingOnDate [
 	<gtExample>
 	| value oneTime |
@@ -37,7 +37,7 @@ BuOneTimePaymentExamples >> evaluateDuringPeriodEndingOnDate [
 	^ oneTime
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #examples }
 BuOneTimePaymentExamples >> evaluateDuringPeriodStartingOnDate [
 	<gtExample>
 	| value oneTime |
@@ -48,7 +48,7 @@ BuOneTimePaymentExamples >> evaluateDuringPeriodStartingOnDate [
 	^ oneTime
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #examples }
 BuOneTimePaymentExamples >> evaluateDuringValidPeriod [
 	<gtExample>
 	| value oneTime |
@@ -59,7 +59,7 @@ BuOneTimePaymentExamples >> evaluateDuringValidPeriod [
 	^ oneTime
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #examples }
 BuOneTimePaymentExamples >> oneTime [
 	<gtExample>
 	^ BuOneTime new date: Date today

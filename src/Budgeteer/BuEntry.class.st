@@ -2,11 +2,11 @@ Class {
 	#name : #BuEntry,
 	#superclass : #Object,
 	#instVars : [
-		'paymentMethod',
 		'money',
 		'comment',
 		'kind',
-		'paymentTerm'
+		'paymentTerm',
+		'schedule'
 	],
 	#category : #'Budgeteer-Model'
 }
@@ -35,6 +35,7 @@ BuEntry >> comment: anObject [
 BuEntry >> initialize [
 	money := BuZeroMoney new.
 	paymentTerm := 0 days.
+	comment := 'Some ', (self class name gtRemovePrefix: 'Bu') asLowercase.
 	self beIncome
 ]
 
@@ -73,18 +74,9 @@ BuEntry >> newTransactionOn: aDate [
 	^ (self kind newTransaction)
 		money: self money;
 		issueDate: aDate;
+		comment: self comment;
 		paymentDate: (aDate + self paymentTerm);
 		businessItem: self
-]
-
-{ #category : #accessing }
-BuEntry >> paymentMethod [
-	^ paymentMethod
-]
-
-{ #category : #accessing }
-BuEntry >> paymentMethod: anObject [
-	paymentMethod := anObject
 ]
 
 { #category : #accessing }
@@ -95,6 +87,11 @@ BuEntry >> paymentTerm [
 { #category : #accessing }
 BuEntry >> paymentTerm: aDuration [
 	paymentTerm := aDuration
+]
+
+{ #category : #accessing }
+BuEntry >> schedule: anObject [
+	schedule := anObject
 ]
 
 { #category : #operations }
@@ -110,7 +107,7 @@ BuEntry >> transactionsFromDate: aStartDate toDate: anEndDate [
 
 { #category : #operations }
 BuEntry >> transactionsFromDate: aStartDate toDate: anEndDate do: aBlock [
-	self paymentMethod
+	schedule
 		fromDate: aStartDate
 		toDate: anEndDate
 		do: [ :aDate | aBlock value: (self newTransactionOn: aDate) ].

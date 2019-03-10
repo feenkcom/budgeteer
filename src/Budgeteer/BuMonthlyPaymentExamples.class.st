@@ -4,7 +4,7 @@ Class {
 	#category : #'Budgeteer-Examples'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #examples }
 BuMonthlyPaymentExamples >> evaluateDuringPeriodEndingSoonerThanTheEndDate [
 	<gtExample>
 	| values monthly |
@@ -15,7 +15,7 @@ BuMonthlyPaymentExamples >> evaluateDuringPeriodEndingSoonerThanTheEndDate [
 	^ monthly
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #examples }
 BuMonthlyPaymentExamples >> evaluateDuringPeriodStartingLaterThanTheStartDate [
 	<gtExample>
 	| values monthly |
@@ -26,7 +26,7 @@ BuMonthlyPaymentExamples >> evaluateDuringPeriodStartingLaterThanTheStartDate [
 	^ monthly
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #examples }
 BuMonthlyPaymentExamples >> evaluateDuringValidPeriod [
 	<gtExample>
 	| values monthly |
@@ -37,8 +37,8 @@ BuMonthlyPaymentExamples >> evaluateDuringValidPeriod [
 	^ monthly
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #examples }
 BuMonthlyPaymentExamples >> monthly [
 	<gtExample>
-	^ BuMonthly new monthDay: 20; startMonth: 1 jan, 2019; endMonth: 1 mar, 2019
+	^ BuMonthly new monthDay: 20; startMonth: (Month month: 1 year: 2019); endMonth: (Month month: 3 year: 2019)
 ]
