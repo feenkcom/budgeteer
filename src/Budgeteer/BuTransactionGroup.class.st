@@ -27,6 +27,11 @@ BuTransactionGroup >> expenseMoney [
 	^ self selectExpense totalMoney
 ]
 
+{ #category : #acessing }
+BuTransactionGroup >> first [
+	^ self transactions first
+]
+
 { #category : #operations }
 BuTransactionGroup >> groupedBy: aBlock [ 
 	"we are reimplementing this method here and not reuse the one in collection
