@@ -24,3 +24,8 @@ BuZeroMoney >> amount [
 BuZeroMoney >> isZero [
 	^ true
 ]
+
+{ #category : #printing }
+BuZeroMoney >> printOn: stream [
+	stream nextPutAll: '0'
+]

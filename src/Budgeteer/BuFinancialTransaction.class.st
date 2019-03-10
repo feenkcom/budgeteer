@@ -36,6 +36,15 @@ BuFinancialTransaction >> effectiveMoney [
 	^ self subclassResponsibility
 ]
 
+{ #category : #initialization }
+BuFinancialTransaction >> initialize [
+	super initialize.
+	comment := 'Undefined transaction'.
+	money := BuZeroMoney new.
+	issueDate := Date today.
+	paymentDate := Date today.
+]
+
 { #category : #testing }
 BuFinancialTransaction >> isExpense [
 	^ false
@@ -76,7 +85,7 @@ BuFinancialTransaction >> paymentDate: anObject [
 	paymentDate := anObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #printing }
 BuFinancialTransaction >> printOn: aStream [
 	aStream
 		nextPutAll: self effectiveMoney printString;
